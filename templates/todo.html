@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {{ bootstrap.load_css() }}
 </head>
 <body>
 
@@ -24,7 +25,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="./static/css/styles.css" rel="stylesheet" />
     </head>
-    <body id="page-top">
+    <body class="bg-black " id="page-top">
         <!-- Navigation-->
 
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -57,18 +58,35 @@
             </div>
         </header>
 
-<section class="bg-dark ">
-        <div class="container" style="height: 700px">
-            <div class="row ">
-                <div class="col-md-8 offset-2 text-white">
+<section class="bg-black" >
+        <div class="container w-50 mt-5 ">
+            <div class="row  ">
+                <div class="text-white">
+                    <form action="{{url_for('add')}}" method="post">
+                        <input type="text" placeholder="Type your task" name="nm" size="70"/>
+                        <button type="submit" >Add</button>
+                    </form>
+                    {%if data_entries%}
+                        {%for each in data_entries%}
+                            <div class="border mt-1">
+                            <span {%if each['done'] %} style="text-decoration: line-through"{%endif%} >
+                                <input type="checkbox" name="done" {% if each['done'] %} checked {%endif%}disabled>  {{each['task']}}
+                            </span>
+                                <div style="float:right"><a  href="{{ url_for('check', index=loop.index0) }}" > Done</a>
+                                <a  href="{{ url_for('delete', index=loop.index0) }}"><button>Delete</button></a> </div>
+</div>
+                        {% endfor %}
 
-
+                    {%endif%}
 
 
                 </div>
+
             </div>
         </div>
 </section>
+
+
 
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; DoThisNow 2023</div></footer>
