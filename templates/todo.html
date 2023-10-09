@@ -28,7 +28,7 @@
     <body class="bg-black " id="page-top">
         <!-- Navigation-->
 
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <nav class=" navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="#page-top">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </nav>
-<header class="masthead" style="height:10px">
+<header class="masthead " style="height:10px">
             <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
                 <div class="d-flex justify-content-center">
                     <div class="text-center">
@@ -59,8 +59,8 @@
         </header>
 
 <section class="bg-black" >
-        <div class="container w-50 mt-5 ">
-            <div class="row  ">
+        <div class="container w-50 my-5 ">
+            <div class="row ">
                 <div class="text-white">
                     <form action="{{url_for('add')}}" method="post">
                         <input type="text" placeholder="Type your task" name="nm" size="70"/>
@@ -68,11 +68,12 @@
                     </form>
                     {%if data_entries%}
                         {%for each in data_entries%}
-                            <div class="border mt-1">
+                            <div class="border my-2">
                             <span {%if each['done'] %} style="text-decoration: line-through"{%endif%} >
                                 <input type="checkbox" name="done" {% if each['done'] %} checked {%endif%}disabled>  {{each['task']}}
                             </span>
-                                <div style="float:right"><a  href="{{ url_for('check', index=loop.index0) }}" > Done</a>
+                                <div style="float:right">
+                                    <a  href="{{ url_for('check', index=loop.index0) }}" >{%if each['done'] %} Undo {%else%} Done {%endif%}</a>
                                 <a  href="{{ url_for('delete', index=loop.index0) }}"><button>Delete</button></a> </div>
 </div>
                         {% endfor %}

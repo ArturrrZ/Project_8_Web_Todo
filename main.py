@@ -1,8 +1,10 @@
 from flask import Flask, render_template, url_for, redirect, request
 from flask_bootstrap import Bootstrap5
 
+import os
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "afafafafas2131"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap5(app)
 
 
@@ -43,4 +45,4 @@ def delete(index):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
